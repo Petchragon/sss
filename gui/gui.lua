@@ -19,7 +19,7 @@ Section:NewToggle("Auto Claim", "ToggleInfo", function(state)
 
             while ClaimLoopRunning do
                 remote:FireServer(unpack(args))
-                task.wait(3)
+                task.wait(4)
             end
         end)
     else
@@ -28,6 +28,9 @@ Section:NewToggle("Auto Claim", "ToggleInfo", function(state)
         end
     end
 end)
+
+------------------------------------------------------------------------------------------------------
+
 
 local Section = Tab:NewSection("Haki Control")
 -- ตัวแปรควบคุมลูป
