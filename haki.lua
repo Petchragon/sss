@@ -1,21 +1,10 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Petch", "DarkTheme")
-
-local Tab = Window:NewTab("Main")
-local Section = Tab:NewSection("Compass")
-
-Section:NewToggle("Auto compass", "ToggleInfo", function(state)
-    loadstring(game:HttpGet(('https://raw.githubusercontent.com/Petchragon/sss/refs/heads/Claim/compass/claim.lua'),true))()
-end)
-
-
 local Section = Tab:NewSection("Haki Control")
 -- ตัวแปรควบคุมลูป
 local hakiLoopRunning = false
 local hakiLoopThread
 
 -- สร้างปุ่มกดเริ่ม/หยุด
-Section:NewToggle("Auto haki", "ToggleInfo", function(state)
+Section:NewButton("เริ่ม / หยุด Auto Haki", "กดเพื่อเปิดหรือปิด Haki", function()
     hakiLoopRunning = not hakiLoopRunning
 
     if hakiLoopRunning then

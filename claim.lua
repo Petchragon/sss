@@ -5,8 +5,6 @@ local player = Players.LocalPlayer
 local remote = game:GetService("ReplicatedStorage").Connections:WaitForChild("Claim_Sam")
 local args = { "Claim1" }
 
-local autoClaim = true -- เปิดทำงานอัตโนมัติทันที
-
 -- ฟังก์ชัน Auto Claim Loop
 task.spawn(function()
     while true do
