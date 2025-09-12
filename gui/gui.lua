@@ -4,10 +4,30 @@ local Window = Library.CreateLib("Petch", "DarkTheme")
 local Tab = Window:NewTab("Main")
 local Section = Tab:NewSection("Compass")
 
-Section:NewToggle("Auto compass", "ToggleInfo", function(state)
-    loadstring(game:HttpGet(('https://raw.githubusercontent.com/Petchragon/sss/refs/heads/Claim/compass/claim.lua'),true))()
-end)
+local ClaimLoopRunning = false
+local ClaimLoopThread
 
+Section:NewToggle("Auto Claim", "ToggleInfo", function(state)
+    ClaimLoopRunning = state
+
+    if ClaimLoopRunning then
+        ClaimLoopThread = task.spawn(function()
+            local Players = game:GetService("Players")
+            local player = Players.LocalPlayer
+            local remote = game:GetService("ReplicatedStorage").Connections:WaitForChild("Claim_Sam")
+            local args = { "Claim1" }
+
+            while ClaimLoopRunning do
+                remote:FireServer(unpack(args))
+                task.wait(3)
+            end
+        end)
+    else
+        if ClaimLoopThread then
+            task.cancel(ClaimLoopThread)
+        end
+    end
+end)
 
 local Section = Tab:NewSection("Haki Control")
 -- ตัวแปรควบคุมลูป
