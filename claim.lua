@@ -1,16 +1,24 @@
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
+local ClaimLoopRunning = false
+local ClaimLoopThread
 
--- ตั้งค่า Remote และ Args
-local remote = game:GetService("ReplicatedStorage").Connections:WaitForChild("Claim_Sam")
-local args = { "Claim1" }
+Section:NewToggle("Auto Claim", "เปิด/ปิด การเคลมอัตโนมัติ", function(state)
+    ClaimLoopRunning = state
 
--- ฟังก์ชัน Auto Claim Loop
-task.spawn(function()
-    while true do
-        task.wait(3)
-        if autoClaim then
-            remote:FireServer(unpack(args))
+    if ClaimLoopRunning then
+        ClaimLoopThread = task.spawn(function()
+            local Players = game:GetService("Players")
+            local player = Players.LocalPlayer
+            local remote = game:GetService("ReplicatedStorage").Connections:WaitForChild("Claim_Sam")
+            local args = { "Claim1" }
+
+            while ClaimLoopRunning do
+                remote:FireServer(unpack(args))
+                task.wait(3)
+            end
+        end)
+    else
+        if ClaimLoopThread then
+            task.cancel(ClaimLoopThread)
         end
     end
 end)
