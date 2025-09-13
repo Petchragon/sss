@@ -4,20 +4,6 @@ local Window = Library.CreateLib("Petch", "DarkTheme")
 
 local Tab = Window:NewTab("Main")
 
--- ระบบแจ้งเตือนความปลอดภัย (ลบส่วนตรวจผู้เล่นอื่นออก)
-local function securityCheck()
-    -- ตรวจหา Anti-Cheat Script
-    for _, obj in pairs(game:GetDescendants()) do
-        local name = obj.Name:lower()
-        if name:find("anti") or name:find("cheat") or name:find("detect") then
-            warn("[Security] ตรวจพบระบบป้องกัน: ", obj:GetFullName())
-            return false
-        end
-    end
-
-    return true
-end
-
 -- สร้าง Section สำหรับ Compass
 local Section = Tab:NewSection("Compass")
 
