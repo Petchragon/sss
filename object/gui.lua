@@ -298,7 +298,7 @@ function Kavo.CreateLib(kavName, themeList)
     toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
     toggleButton.BackgroundTransparency = 1
     toggleButton.Size = UDim2.new(0, 30, 0, 30)
-    toggleButton.Position = UDim2.new(1, -60, 0, 0)
+    toggle.Position = UDim2.new(0.949999988, -30, 0.137999997, 0)
     toggleButton.Parent = mainFrame
     local isCollapsed = false
 
