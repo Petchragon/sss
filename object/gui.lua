@@ -302,7 +302,7 @@ function Kavo.CreateLib(kavName, themeList)
     MinimizeButton.ZIndex = 2
     MinimizeButton.Image = "rbxassetid://5597105827"
     MinimizeButton.ImageRectOffset = Vector2.new(284, 4)
-    MinimizeButton.ImageRectSize = Vector2.new(24, 24)
+    MinimizeButton.ImageRectSize = Vector2.new(13, 13)
     MinimizeButton.MouseButton1Click:Connect(function()
         if not isMinimized then
         game.TweenService:Create(MinimizeButton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
