@@ -210,8 +210,6 @@ function Kavo.CreateLib(kavName, themeList)
     local pages = Instance.new("Frame")
     local Pages = Instance.new("Folder")
     local infoContainer = Instance.new("Frame")
-    local originalSize = Main.Size
-    local isMinimized = false
 
     local blurFrame = Instance.new("Frame")
 
@@ -275,6 +273,7 @@ function Kavo.CreateLib(kavName, themeList)
 
     close.Name = "close"
     close.Parent = MainHeader
+    close.ZIndex = 5
     close.BackgroundTransparency = 1.000
     close.Position = UDim2.new(0.949999988, 0, 0.137999997, 0)
     close.Size = UDim2.new(0, 21, 0, 21)
@@ -295,9 +294,10 @@ function Kavo.CreateLib(kavName, themeList)
         ScreenGui:Destroy()
     end)
 
-
+    Main.ZIndex = 1
     MinimizeButton.Name = "Minimize"
     MinimizeButton.Parent = MainHeader
+    MinimizeButton.ZIndex = 5
     MinimizeButton.BackgroundTransparency = 1.000
     MinimizeButton.Position = UDim2.new(0.949999988, -50, 0.137999997, 0)
     MinimizeButton.Size = UDim2.new(0, 21, 0, 21)
@@ -307,6 +307,8 @@ function Kavo.CreateLib(kavName, themeList)
     MinimizeButton.ImageRectSize = Vector2.new(24, 24)
     Main.AnchorPoint = Vector2.new(0.5, 0.5)
     Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+    local originalSize = Main.Size
+    local isMinimized = false
     MinimizeButton.MouseButton1Click:Connect(function()
     if not isMinimized then
         -- ย่อ GUI และทำให้ปุ่มโปร่งใส
