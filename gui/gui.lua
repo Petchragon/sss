@@ -33,37 +33,28 @@ end)
 ------------------------------------------------------------------------------------------------------
 
 local Section = Tab:NewSection("Haki Control")
+-- ตัวแปรควบคุมลูป
 local hakiLoopRunning = false
 local hakiLoopThread
 
-Section:NewToggle("Auto Haki", "เปิดปิดฮาคิอัตโนมัติ", function(state)
-    hakiLoopRunning = state
+-- สร้างปุ่มกดเริ่ม/หยุด
+Section:NewButton("เริ่ม / หยุด Auto Haki", "กดเพื่อเปิดหรือปิด Haki", function()
+    hakiLoopRunning = not hakiLoopRunning
 
     if hakiLoopRunning then
-        if not securityCheck() then
-            warn("[Auto Haki] ยกเลิกการทำงานเพราะความเสี่ยงด้านความปลอดภัย")
-            return
-        end
-
+        -- เริ่มลูป: เปิด Haki
         hakiLoopThread = task.spawn(function()
             while hakiLoopRunning do
                 local args = {
                     [1] = "On",
                     [2] = 1
                 }
-
-                local success, err = pcall(function()
-                    workspace.UserData.User_926062175.III:FireServer(unpack(args))
-                end)
-
-                if not success then
-                    warn("[Auto Haki] เกิดข้อผิดพลาด:", err)
-                end
-
-                task.wait(math.random(2, 4)) -- รอแบบสุ่ม
+                workspace.UserData.User_926062175.III:FireServer(unpack(args))
+                wait(1)
             end
         end)
     else
+        -- หยุดลูป: ปิด Haki
         if hakiLoopThread then
             task.cancel(hakiLoopThread)
         end
@@ -72,13 +63,6 @@ Section:NewToggle("Auto Haki", "เปิดปิดฮาคิอัตโน
             [1] = "Off",
             [2] = 9
         }
-
-        local success, err = pcall(function()
-            workspace.UserData.User_926062175.III:FireServer(unpack(args))
-        end)
-
-        if not success then
-            warn("[Auto Haki] ปิด Haki ล้มเหลว:", err)
-        end
+        workspace.UserData.User_926062175.III:FireServer(unpack(args))
     end
 end)
