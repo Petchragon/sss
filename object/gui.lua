@@ -304,19 +304,16 @@ function Kavo.CreateLib(kavName, themeList)
     MinimizeButton.ImageRectOffset = Vector2.new(284, 4)
     MinimizeButton.ImageRectSize = Vector2.new(24, 24)
     MinimizeButton.MouseButton1Click:Connect(function()
-    if not isMinimized then
-        -- ย่อ GUI
-        game.TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Quad), {
-            Size = UDim2.new(0, 360, 0, 50)
+        game.TweenService:Create(Minimize, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            ImageTransparency = 1
         }):Play()
-        isMinimized = true
-    else
-        -- ขยายกลับ
-        game.TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Quad), {
-            Size = originalSize
-        }):Play()
-        isMinimized = false
-    end
+        wait()
+        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0, 360, 0, 50),
+			Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
+		}):Play()
+        wait(1)
+        ScreenGui:Minimize()
     end)
    
     MainSide.Name = "MainSide"
