@@ -269,23 +269,27 @@ function Kavo.CreateLib(kavName, themeList)
     title.TextSize = 16.000
     title.TextXAlignment = Enum.TextXAlignment.Left
 
-    CloseButton.Name = "CloseButton"
-    CloseButton.Parent = TopBar
-    CloseButton.BackgroundColor3 = Color3.new(0.145098, 0.141176, 0.14902)
-    CloseButton.BorderSizePixel = 0
-    CloseButton.Position = UDim2.new(0.949999988, 0, 0.137999997, 0)
-    CloseButton.Size = UDim2.new(0, 19, 0, 19)
-    CloseButton.Font = Enum.Font.SourceSans
-    CloseButton.Text = ""
-    CloseButton.TextColor3 = Color3.new(0, 0, 0)
-    CloseButton.TextSize = 14
-
-    ImageLabel.Parent = CloseButton
-    ImageLabel.BackgroundColor3 = Color3.new(1, 1, 1)
-    ImageLabel.BackgroundTransparency = 1
-    ImageLabel.Position = UDim2.new(0, 5, 0, 5)
-    ImageLabel.Size = UDim2.new(0, 9, 0, 9)
-    ImageLabel.Image = "http://www.roblox.com/asset/?id=5597086202"
+    close.Name = "close"
+    close.Parent = MainHeader
+    close.BackgroundTransparency = 1.000
+    close.Position = UDim2.new(0.949999988, 0, 0.137999997, 0)
+    close.Size = UDim2.new(0, 21, 0, 21)
+    close.ZIndex = 2
+    close.Image = "rbxassetid://3926305904"
+    close.ImageRectOffset = Vector2.new(284, 4)
+    close.ImageRectSize = Vector2.new(24, 24)
+    close.MouseButton1Click:Connect(function()
+        game.TweenService:Create(close, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            ImageTransparency = 1
+        }):Play()
+        wait()
+        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0,0,0,0),
+			Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
+		}):Play()
+        wait(1)
+        ScreenGui:Destroy()
+    end)
 
     MaximizeButton.Name = "MaximizeButton"
     MaximizeButton.Parent = TopBar
