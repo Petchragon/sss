@@ -300,7 +300,7 @@ function Kavo.CreateLib(kavName, themeList)
     MinimizeButton.Position = UDim2.new(0.949999988, -50, 0.137999997, 0)
     MinimizeButton.Size = UDim2.new(0, 13, 0, 13)
     MinimizeButton.ZIndex = 2
-    MinimizeButton.Image = "http://www.roblox.com/asset/?id=5597105827"
+    MinimizeButton.Image = "https://icons.veryicon.com/png/o/miscellaneous/skent-icon/minimize-8.png"
     MinimizeButton.ImageRectOffset = Vector2.new(284, 4)
     MinimizeButton.ImageRectSize = Vector2.new(13, 13)
     MinimizeButton.ScaleType = Enum.ScaleType.Crop
