@@ -157,7 +157,7 @@ function lib:Window(text)
 	top.Size = UDim2.new(0, 396, 0, 27)
 
     close.Name = "close"
-    close.Parent = MainHeader
+    close.Parent = top
     close.BackgroundTransparency = 1.000
     close.Position = UDim2.new(0.931818187, 0, 0.111111112, 0)
     close.Size = UDim2.new(0, 20, 0, 20)
@@ -175,7 +175,7 @@ function lib:Window(text)
 	minimize.Parent = top
 	minimize.BackgroundTransparency = 1.000
 	minimize.LayoutOrder = 6
-	minimize.Position = UDim2.new(0.931818187, -40, 0.111111112, 0)
+	minimize.Position = UDim2.new(0.931818187, -30, 0.111111112, 0)
 	minimize.Size = UDim2.new(0, 20, 0, 20)
 	minimize.ZIndex = 2
 	minimize.Image = "rbxassetid://3926307971"
