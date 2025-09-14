@@ -293,28 +293,6 @@ function Kavo.CreateLib(kavName, themeList)
         ScreenGui:Destroy()
     end)
 
-    MaxmizeButton.Name = "Maximize"
-    MaxmizeButton.Parent = MainHeader
-    MaxmizeButton.BackgroundTransparency = 1.000
-    MaxmizeButton.Position = UDim2.new(0.949999988, -19, 0.137999997, 0)
-    MaxmizeButton.Size = UDim2.new(0, 21, 0, 21)
-    MaxmizeButton.ZIndex = 2
-    MaxmizeButton.Image = "http://www.roblox.com/asset/?id=5597108117"
-    MaxmizeButton.ImageRectOffset = Vector2.new(284, 4)
-    MaxmizeButton.ImageRectSize = Vector2.new(24, 24)
-    MaxmizeButton.MouseButton1Click:Connect(function()
-        game.TweenService:Create(Maximize, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
-            ImageTransparency = 1
-        }):Play()
-        wait()
-        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0, 360, 0, 269),
-			Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
-		}):Play()
-        wait(1)
-        isMaxize = true
-    end)
-
     MinimizeButton.Name = "Minimize"
     MinimizeButton.Parent = MainHeader
     MinimizeButton.BackgroundTransparency = 1.000
@@ -335,7 +313,15 @@ function Kavo.CreateLib(kavName, themeList)
 		}):Play()
         wait(1)
         isMinimized = true
-    end)
+        
+    if not isMinimized then
+        -- ขยายกลับ
+        game.TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Quad), {
+            Size = originalSize
+        }):Play()
+        isMinimized = false
+    end
+end)
    
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
