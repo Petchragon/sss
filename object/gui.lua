@@ -200,6 +200,8 @@ function Kavo.CreateLib(kavName, themeList)
     local coverup = Instance.new("Frame")
     local title = Instance.new("TextLabel")
     local close = Instance.new("ImageButton")
+    local MaxmizeButton = Instance.new("ImageButton")
+    local MinimizeButton = Instance.new("ImageButton")
     local MainSide = Instance.new("Frame")
     local sideCorner = Instance.new("UICorner")
     local coverup_2 = Instance.new("Frame")
@@ -291,39 +293,50 @@ function Kavo.CreateLib(kavName, themeList)
         ScreenGui:Destroy()
     end)
 
-    MaximizeButton.Name = "MaximizeButton"
-    MaximizeButton.Parent = TopBar
-    MaximizeButton.BackgroundColor3 = Color3.new(0.145098, 0.141176, 0.14902)
-    MaximizeButton.BorderSizePixel = 0
-    MaximizeButton.Position = UDim2.new(0.949999988, -19, 0.137999997, 0)
-    MaximizeButton.Size = UDim2.new(0, 19, 0, 19)
-    MaximizeButton.Font = Enum.Font.SourceSans
-    MaximizeButton.Text = ""
-    MaximizeButton.TextColor3 = Color3.new(0, 0, 0)
-    MaximizeButton.TextSize = 14
+    MaxmizeButton.Name = "Maximize"
+    MaxmizeButton.Parent = MainHeader
+    MaxmizeButton.BackgroundTransparency = 1.000
+    MaxmizeButton.Position = UDim2.new(0.949999988, -19, 0.137999997, 0)
+    MaxmizeButton.Size = UDim2.new(0, 21, 0, 21)
+    MaxmizeButton.ZIndex = 2
+    MaxmizeButton.Image = "http://www.roblox.com/asset/?id=5597108117"
+    MaxmizeButton.ImageRectOffset = Vector2.new(284, 4)
+    MaxmizeButton.ImageRectSize = Vector2.new(24, 24)
+    MaxmizeButton.MouseButton1Click:Connect(function()
+        game.TweenService:Create(Maximize, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            ImageTransparency = 1
+        }):Play()
+        wait()
+        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0, 360, 0, 269),
+			Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
+		}):Play()
+        wait(1)
+        isMaxize = true
+    end)
 
-    ImageLabel_2.Parent = MaximizeButton
-    ImageLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
-    ImageLabel_2.BackgroundTransparency = 1
-    ImageLabel_2.Position = UDim2.new(0, 5, 0, 5)
-    ImageLabel_2.Size = UDim2.new(0, 9, 0, 9)
-    ImageLabel_2.Image = "http://www.roblox.com/asset/?id=5597108117" 
-    MinimizeButton.Name = "MinimizeButton"
-    MinimizeButton.Parent = TopBar
-    MinimizeButton.BackgroundColor3 = Color3.new(0.145098, 0.141176, 0.14902)
-    MinimizeButton.BorderSizePixel = 0
+    MinimizeButton.Name = "Minimize"
+    MinimizeButton.Parent = MainHeader
+    MinimizeButton.BackgroundTransparency = 1.000
     MinimizeButton.Position = UDim2.new(0.949999988, -50, 0.137999997, 0)
-    MinimizeButton.Size = UDim2.new(0, 19, 0, 19)
-    MinimizeButton.Font = Enum.Font.SourceSans
-    MinimizeButton.Text = ""
-    MinimizeButton.TextSize = 14
-
-    ImageLabel_3.Parent = MinimizeButton
-    ImageLabel_3.BackgroundColor3 = Color3.new(1, 1, 1)
-    ImageLabel_3.Position = UDim2.new(0, 5, 0, 5)
-    ImageLabel_3.Size = UDim2.new(0, 9, 0, 9)
-    ImageLabel_3.Image = "http://www.roblox.com/asset/?id=5597105827"
-
+    MinimizeButton.Size = UDim2.new(0, 21, 0, 21)
+    MinimizeButton.ZIndex = 2
+    MinimizeButton.Image = "http://www.roblox.com/asset/?id=5597105827"
+    MinimizeButton.ImageRectOffset = Vector2.new(284, 4)
+    MinimizeButton.ImageRectSize = Vector2.new(24, 24)
+    MinimizeButton.MouseButton1Click:Connect(function()
+        game.TweenService:Create(Minimize, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            ImageTransparency = 1
+        }):Play()
+        wait()
+        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0, 360, 0, 50),
+			Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
+		}):Play()
+        wait(1)
+        isMinimized = true
+    end)
+   
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
     MainSide.BackgroundColor3 = themeList.Header
