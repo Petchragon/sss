@@ -273,7 +273,6 @@ function Kavo.CreateLib(kavName, themeList)
 
     close.Name = "close"
     close.Parent = MainHeader
-    close.ZIndex = 5
     close.BackgroundTransparency = 1.000
     close.Position = UDim2.new(0.949999988, 0, 0.137999997, 0)
     close.Size = UDim2.new(0, 21, 0, 21)
@@ -297,7 +296,6 @@ function Kavo.CreateLib(kavName, themeList)
     Main.ZIndex = 1
     MinimizeButton.Name = "Minimize"
     MinimizeButton.Parent = MainHeader
-    MinimizeButton.ZIndex = 5
     MinimizeButton.BackgroundTransparency = 1.000
     MinimizeButton.Position = UDim2.new(0.949999988, -50, 0.137999997, 0)
     MinimizeButton.Size = UDim2.new(0, 21, 0, 21)
@@ -305,31 +303,28 @@ function Kavo.CreateLib(kavName, themeList)
     MinimizeButton.Image = "http://www.roblox.com/asset/?id=5597105827"
     MinimizeButton.ImageRectOffset = Vector2.new(284, 4)
     MinimizeButton.ImageRectSize = Vector2.new(24, 24)
-    Main.AnchorPoint = Vector2.new(0.5, 0.5)
-    Main.Position = UDim2.new(0.5, 0, 0.5, 0)
-    local originalSize = Main.Size
-    local isMinimized = false
     MinimizeButton.MouseButton1Click:Connect(function()
-    if not isMinimized then
-        -- ย่อ GUI และทำให้ปุ่มโปร่งใส
+        if not isMinimized then
         game.TweenService:Create(MinimizeButton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
             ImageTransparency = 1
         }):Play()
+        wait()
         game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-            Size = UDim2.new(0, 360, 0, 50),  -- ย่อเหลือแค่แถบด้านบน
-        }):Play()
+			Size = UDim2.new(0,525,0,60),
+			Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
+		}):Play()
+        wait(1)
         isMinimized = true
-    else
-        -- ขยาย GUI กลับ และเอาปุ่มกลับมา
+        else
         game.TweenService:Create(MinimizeButton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
             ImageTransparency = 0
         }):Play()
         game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-            Size = originalSize,
+            Size = UDim2.new(0,525,0,318),
         }):Play()
         isMinimized = false
-    end
-end)
+        end
+    end)
    
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
