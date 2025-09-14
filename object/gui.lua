@@ -291,20 +291,26 @@ function Kavo.CreateLib(kavName, themeList)
         ScreenGui:Destroy()
     end)
 
-    local toggleButton = Instance.new("TextButton")
-    toggleButton.Text = ""
-    toggleButton.Font = Enum.Font.SourceSansBold
-    toggleButton.TextSize = 18
-    toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    toggleButton.BackgroundTransparency = 1
-    toggleButton.Size = UDim2.new(0, 30, 0, 30)
-    toggle.Position = UDim2.new(0.949999988, -30, 0.137999997, 0)
-    toggleButton.Parent = mainFrame
-    local isCollapsed = false
+    local collapseButton = Instance.new("TextButton")
+    collapseButton.Size = UDim2.new(0, 30, 0, 30)
+    collapseButton.Position = UDim2.new(0.949999988, -30, 0.137999997, 0)
+    collapseButton.BackgroundColor3 = Color3.fromRGB(255, 192, 203) -- ชมพู
+    collapseButton.Text = "-"
+    collapseButton.Font = Enum.Font.SourceSansBold
+    collapseButton.TextSize = 20
+    collapseButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+    collapseButton.Parent = mainFrame
 
-    toggleButton.MouseButton1Click:Connect(function()
-    isCollapsed = not isCollapsed
-    mainFrame.Size = isCollapsed and collapsedSize or expandedSize
+    -- เมื่อกดปุ่ม
+    collapseButton.MouseButton1Click:Connect(function()
+	isCollapsed = not isCollapsed
+	mainFrame.Size = isCollapsed and collapsedSize or expandedSize
+    end)
+
+    collapseButton.MouseEnter:Connect(function()
+        game.TweenService:Create(collapseButton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            BackgroundColor3 = Color3.fromRGB(255, 105, 180) -- ชมพูเข้มขึ้น
+        }):Play()
     end)
 
     MainSide.Name = "MainSide"
