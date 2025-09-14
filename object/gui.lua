@@ -163,7 +163,7 @@ function lib:Window(text)
     close.Size = UDim2.new(0, 20, 0, 20)
     close.ZIndex = 2
     close.Image = "rbxassetid://3926305904"
-    close.ImageRectOffset = Vector2.new(155, 805)
+    close.ImageRectOffset = Vector2.new(160, 805)
     close.ImageRectSize = Vector2.new(36, 36)
     close.MouseButton1Click:Connect(function()
         mainframe:TweenSize(UDim2.new(0, 396, 0, 27), "Out", "Quad", 0.25, true, function()
