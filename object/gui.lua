@@ -269,27 +269,56 @@ function Kavo.CreateLib(kavName, themeList)
     title.TextSize = 16.000
     title.TextXAlignment = Enum.TextXAlignment.Left
 
-    collapseButton.Name = "collapse"
-    collapseButton.Parent = MainHeader
-    collapseButton.BackgroundTransparency = 1.000
-    collapseButton.Position = UDim2.new(0.949999988, 0, 0.137999997, 0)
-    collapseButton.Size = UDim2.new(0, 21, 0, 21)
-    collapseButton.ZIndex = 2
-    collapseButton.Image = "rbxassetid://3926305904"
-    collapseButton.ImageRectOffset = Vector2.new(284, 4)
-    collapseButton.ImageRectSize = Vector2.new(24, 24)
-    collapseButton.MouseButton1Click:Connect(function()
-        game.TweenService:Create(collapse, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
-            ImageTransparency = 1
-        }):Play()
-        wait()
-        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0,0,0,0),
-			Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
-		}):Play()
-        wait(1)
-        ScreenGui:Destroy()
-    end)
+    CloseButton.Name = "CloseButton"
+    CloseButton.Parent = TopBar
+    CloseButton.BackgroundColor3 = Color3.new(0.145098, 0.141176, 0.14902)
+    CloseButton.BorderSizePixel = 0
+    CloseButton.Position = UDim2.new(0.949999988, 0, 0.137999997, 0)
+    CloseButton.Size = UDim2.new(0, 19, 0, 19)
+    CloseButton.Font = Enum.Font.SourceSans
+    CloseButton.Text = ""
+    CloseButton.TextColor3 = Color3.new(0, 0, 0)
+    CloseButton.TextSize = 14
+
+    ImageLabel.Parent = CloseButton
+    ImageLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+    ImageLabel.BackgroundTransparency = 1
+    ImageLabel.Position = UDim2.new(0, 5, 0, 5)
+    ImageLabel.Size = UDim2.new(0, 9, 0, 9)
+    ImageLabel.Image = "http://www.roblox.com/asset/?id=5597086202"
+
+    MaximizeButton.Name = "MaximizeButton"
+    MaximizeButton.Parent = TopBar
+    MaximizeButton.BackgroundColor3 = Color3.new(0.145098, 0.141176, 0.14902)
+    MaximizeButton.BorderSizePixel = 0
+    MaximizeButton.Position = UDim2.new(0.949999988, -19, 0.137999997, 0)
+    MaximizeButton.Size = UDim2.new(0, 19, 0, 19)
+    MaximizeButton.Font = Enum.Font.SourceSans
+    MaximizeButton.Text = ""
+    MaximizeButton.TextColor3 = Color3.new(0, 0, 0)
+    MaximizeButton.TextSize = 14
+
+    ImageLabel_2.Parent = MaximizeButton
+    ImageLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
+    ImageLabel_2.BackgroundTransparency = 1
+    ImageLabel_2.Position = UDim2.new(0, 5, 0, 5)
+    ImageLabel_2.Size = UDim2.new(0, 9, 0, 9)
+    ImageLabel_2.Image = "http://www.roblox.com/asset/?id=5597108117" 
+    MinimizeButton.Name = "MinimizeButton"
+    MinimizeButton.Parent = TopBar
+    MinimizeButton.BackgroundColor3 = Color3.new(0.145098, 0.141176, 0.14902)
+    MinimizeButton.BorderSizePixel = 0
+    MinimizeButton.Position = UDim2.new(0.949999988, -50, 0.137999997, 0)
+    MinimizeButton.Size = UDim2.new(0, 19, 0, 19)
+    MinimizeButton.Font = Enum.Font.SourceSans
+    MinimizeButton.Text = ""
+    MinimizeButton.TextSize = 14
+
+    ImageLabel_3.Parent = MinimizeButton
+    ImageLabel_3.BackgroundColor3 = Color3.new(1, 1, 1)
+    ImageLabel_3.Position = UDim2.new(0, 5, 0, 5)
+    ImageLabel_3.Size = UDim2.new(0, 9, 0, 9)
+    ImageLabel_3.Image = "http://www.roblox.com/asset/?id=5597105827"
 
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
