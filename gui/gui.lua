@@ -5,34 +5,22 @@ local Window = Library.CreateLib("Petch", "DarkTheme")
 local Tab = Window:NewTab("Main")
 
 -- สร้าง Section สำหรับ Compass
-local Section = Tab:NewSection("Compass")
-
 local ClaimLoopRunning = false
 local ClaimLoopThread
 
-Section:NewToggle("Auto Claim", "รับของอัตโนมัติ", function(state)
+Section:NewToggle("Auto Claim", "เปิด/ปิด การเคลมอัตโนมัติ", function(state)
     ClaimLoopRunning = state
 
     if ClaimLoopRunning then
-        if not securityCheck() then
-            warn("[Auto Claim] ยกเลิกการทำงานเพราะความเสี่ยงด้านความปลอดภัย")
-            return
-        end
-
         ClaimLoopThread = task.spawn(function()
+            local Players = game:GetService("Players")
+            local player = Players.LocalPlayer
             local remote = game:GetService("ReplicatedStorage").Connections:WaitForChild("Claim_Sam")
             local args = { "Claim1" }
 
             while ClaimLoopRunning do
-                local success, err = pcall(function()
-                    remote:FireServer(unpack(args))
-                end)
-
-                if not success then
-                    warn("[Auto Claim] เกิดข้อผิดพลาด:", err)
-                end
-
-                task.wait(math.random(3, 6)) -- รอแบบสุ่มเวลา
+                remote:FireServer(unpack(args))
+                task.wait(math.random(2, 4))
             end
         end)
     else
