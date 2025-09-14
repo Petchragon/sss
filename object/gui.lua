@@ -297,11 +297,11 @@ function Kavo.CreateLib(kavName, themeList)
     MinimizeButton.Name = "Minimize"
     MinimizeButton.Parent = MainHeader
     MinimizeButton.BackgroundTransparency = 1.000
-    MinimizeButton.Position = UDim2.new(0.949999988, -50, 0.137999997, 0)
+    MinimizeButton.Position = UDim2.new(0.949999988, -40, 0.137999997, 0)
     MinimizeButton.Size = UDim2.new(0, 21, 0, 21)
     MinimizeButton.ZIndex = 2
     MinimizeButton.Image = "rbxassetid://3926305904"
-    MinimizeButton.ImageRectOffset = Vector2.new(245, 210)
+    MinimizeButton.ImageRectOffset = Vector2.new(250, 210)
     MinimizeButton.ImageRectSize = Vector2.new(24, 24)
     MinimizeButton.MouseButton1Click:Connect(function()
         if not isMinimized then
