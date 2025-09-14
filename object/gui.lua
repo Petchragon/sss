@@ -110,6 +110,7 @@ function lib:Window(text)
 	local tablist = Instance.new("UIListLayout")
 	local top = Instance.new("Frame")
 	local title = Instance.new("TextLabel")
+    local close = Instance.new("ImageButton")
 	local minimize = Instance.new("ImageButton")
 
 	VenLib.Name = "VenLib"
@@ -155,11 +156,33 @@ function lib:Window(text)
 	top.Position = UDim2.new(0, 0, -0.00381628261, 0)
 	top.Size = UDim2.new(0, 396, 0, 27)
 
+    close.Name = "close"
+    close.Parent = MainHeader
+    close.BackgroundTransparency = 1.000
+    close.Position = UDim2.new(0.931818187, 0, 0.111111112, 0)
+    close.Size = UDim2.new(0, 21, 0, 21)
+    close.ZIndex = 2
+    close.Image = "rbxassetid://3926305904"
+    close.ImageRectOffset = Vector2.new(284, 4)
+    close.ImageRectSize = Vector2.new(36, 36)
+    close.MouseButton1Click:Connect(function()
+        game.TweenService:Create(close, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+            ImageTransparency = 1
+        }):Play()
+        wait()
+        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			Size = UDim2.new(0,0,0,0),
+			Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
+		}):Play()
+        wait(1)
+        ScreenGui:Destroy()
+    end)
+
 	minimize.Name = "minimize"
 	minimize.Parent = top
 	minimize.BackgroundTransparency = 1.000
 	minimize.LayoutOrder = 6
-	minimize.Position = UDim2.new(0.931818187, 0, 0.111111112, 0)
+	minimize.Position = UDim2.new(0.931818187, -60, 0.111111112, 0)
 	minimize.Size = UDim2.new(0, 20, 0, 20)
 	minimize.ZIndex = 2
 	minimize.Image = "rbxassetid://3926307971"
