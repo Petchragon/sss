@@ -300,8 +300,8 @@ function Kavo.CreateLib(kavName, themeList)
     MinimizeButton.Position = UDim2.new(0.949999988, -50, 0.137999997, 0)
     MinimizeButton.Size = UDim2.new(0, 21, 0, 21)
     MinimizeButton.ZIndex = 2
-    MinimizeButton.Image = "https://icons.veryicon.com/png/o/miscellaneous/skent-icon/minimize-8.png"
-    MinimizeButton.ImageRectOffset = Vector2.new(284, 4)
+    MinimizeButton.Image = "rbxassetid://3926305904"
+    MinimizeButton.ImageRectOffset = Vector2.new(284, 308)
     MinimizeButton.ImageRectSize = Vector2.new(24, 24)
     MinimizeButton.ScaleType = Enum.ScaleType.Crop
     MinimizeButton.MouseButton1Click:Connect(function()
