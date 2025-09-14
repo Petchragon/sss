@@ -1,38 +1,25 @@
--- โหลด Kavo UI Library
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Petch", "DarkTheme")
 
 local Tab = Window:NewTab("Main")
 
--- สร้าง Section สำหรับ Compass
-local Section = Tab:NewSection("Compass")
+-- Section สำหรับ Auto Claim
+local Section = Tab:NewSection("Auto Claim")
 
 local ClaimLoopRunning = false
 local ClaimLoopThread
 
-Section:NewToggle("Auto Claim", "รับของอัตโนมัติ", function(state)
+Section:NewToggle("Auto Claim", "เปิด/ปิด การเคลมอัตโนมัติ", function(state)
     ClaimLoopRunning = state
 
     if ClaimLoopRunning then
-        if not securityCheck() then
-            warn("[Auto Claim] ยกเลิกการทำงานเพราะความเสี่ยงด้านความปลอดภัย")
-            return
-        end
-
         ClaimLoopThread = task.spawn(function()
             local remote = game:GetService("ReplicatedStorage").Connections:WaitForChild("Claim_Sam")
             local args = { "Claim1" }
 
             while ClaimLoopRunning do
-                local success, err = pcall(function()
-                    remote:FireServer(unpack(args))
-                end)
-
-                if not success then
-                    warn("[Auto Claim] เกิดข้อผิดพลาด:", err)
-                end
-
-                task.wait(math.random(3, 6)) -- รอแบบสุ่มเวลา
+                remote:FireServer(unpack(args))
+                task.wait(math.random(2, 4))
             end
         end)
     else
@@ -48,31 +35,19 @@ local Section = Tab:NewSection("Haki Control")
 local hakiLoopRunning = false
 local hakiLoopThread
 
-Section:NewToggle("Auto Haki", "เปิดปิดฮาคิอัตโนมัติ", function(state)
-    hakiLoopRunning = state
+Section:NewButton("เริ่ม / หยุด Auto Haki", "กดเพื่อเปิดหรือปิด Haki", function()
+    hakiLoopRunning = not hakiLoopRunning
+    local userId = game.Players.LocalPlayer.UserId
 
     if hakiLoopRunning then
-        if not securityCheck() then
-            warn("[Auto Haki] ยกเลิกการทำงานเพราะความเสี่ยงด้านความปลอดภัย")
-            return
-        end
-
         hakiLoopThread = task.spawn(function()
             while hakiLoopRunning do
                 local args = {
                     [1] = "On",
                     [2] = 1
                 }
-
-                local success, err = pcall(function()
-                    workspace.UserData.User_926062175.III:FireServer(unpack(args))
-                end)
-
-                if not success then
-                    warn("[Auto Haki] เกิดข้อผิดพลาด:", err)
-                end
-
-                task.wait(math.random(2, 4)) -- รอแบบสุ่ม
+                workspace.UserData["User_" .. userId].III:FireServer(unpack(args))
+                task.wait(1)
             end
         end)
     else
@@ -84,13 +59,6 @@ Section:NewToggle("Auto Haki", "เปิดปิดฮาคิอัตโน
             [1] = "Off",
             [2] = 9
         }
-
-        local success, err = pcall(function()
-            workspace.UserData.User_926062175.III:FireServer(unpack(args))
-        end)
-
-        if not success then
-            warn("[Auto Haki] ปิด Haki ล้มเหลว:", err)
-        end
+        workspace.UserData["User_" .. userId].III:FireServer(unpack(args))
     end
 end)
