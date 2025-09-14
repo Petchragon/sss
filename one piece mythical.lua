@@ -1,5 +1,5 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Petch", "DarkTheme")
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Petchragon/sss/refs/heads/Claim/compass/object/gui.lua"))()
+local Window = Library.CreateLib("Petchragon", "Midnight")
 
 local Tab = Window:NewTab("Main")
 
