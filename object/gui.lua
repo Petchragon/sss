@@ -304,12 +304,6 @@ function Kavo.CreateLib(kavName, themeList)
     MinimizeButton.ImageRectOffset = Vector2.new(250, 210)
     MinimizeButton.ImageRectSize = Vector2.new(24, 24)
     MinimizeButton.MouseButton1Click:Connect(function()
-        if not isMinimized then
-				for _, child in pairs(Main:GetChildren()) do
-   			 if child:IsA("GuiObject") then
-       			child.Visible = false -- ทำได้เฉพาะพวกที่แสดง GUI เท่านั้น
-   		 		end
-			end
         game.TweenService:Create(MinimizeButton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
             ImageTransparency = 0
         }):Play()
@@ -330,6 +324,14 @@ function Kavo.CreateLib(kavName, themeList)
         isMinimized = false
         end
     end)
+
+	            if not isMinimized then
+				for _, child in pairs(Main:GetChildren()) do
+   			 if child:IsA("GuiObject") then
+       			child.Visible = false -- ทำได้เฉพาะพวกที่แสดง GUI เท่านั้น
+   		 		end
+			end
+	
    
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
@@ -381,7 +383,6 @@ function Kavo.CreateLib(kavName, themeList)
     infoContainer.Position = UDim2.new(0.299047619, 0, 0.874213815, 0)
     infoContainer.Size = UDim2.new(0, 368, 0, 33)
 
-    
     coroutine.wrap(function()
         while wait() do
             Main.BackgroundColor3 = themeList.Background
