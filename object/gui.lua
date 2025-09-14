@@ -175,7 +175,7 @@ function lib:Window(text)
 	minimize.Parent = top
 	minimize.BackgroundTransparency = 1.000
 	minimize.LayoutOrder = 6
-	minimize.Position = UDim2.new(0.931818187, -60, 0.111111112, 0)
+	minimize.Position = UDim2.new(0.931818187, -40, 0.111111112, 0)
 	minimize.Size = UDim2.new(0, 20, 0, 20)
 	minimize.ZIndex = 2
 	minimize.Image = "rbxassetid://3926307971"
