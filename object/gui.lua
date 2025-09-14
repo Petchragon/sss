@@ -269,17 +269,17 @@ function Kavo.CreateLib(kavName, themeList)
     title.TextSize = 16.000
     title.TextXAlignment = Enum.TextXAlignment.Left
 
-    close.Name = "close"
-    close.Parent = MainHeader
-    close.BackgroundTransparency = 1.000
-    close.Position = UDim2.new(0.949999988, 0, 0.137999997, 0)
-    close.Size = UDim2.new(0, 21, 0, 21)
-    close.ZIndex = 2
-    close.Image = "rbxassetid://3926305904"
-    close.ImageRectOffset = Vector2.new(284, 4)
-    close.ImageRectSize = Vector2.new(24, 24)
-    close.MouseButton1Click:Connect(function()
-        game.TweenService:Create(close, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+    collapseButton.Name = "collapse"
+    collapseButton.Parent = MainHeader
+    collapseButton.BackgroundTransparency = 1.000
+    collapseButton.Position = UDim2.new(0.949999988, 0, 0.137999997, 0)
+    collapseButton.Size = UDim2.new(0, 21, 0, 21)
+    collapseButton.ZIndex = 2
+    collapseButton.Image = "rbxassetid://3926305904"
+    collapseButton.ImageRectOffset = Vector2.new(284, 4)
+    collapseButton.ImageRectSize = Vector2.new(24, 24)
+    collapseButton.MouseButton1Click:Connect(function()
+        game.TweenService:Create(collapse, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
             ImageTransparency = 1
         }):Play()
         wait()
@@ -289,28 +289,6 @@ function Kavo.CreateLib(kavName, themeList)
 		}):Play()
         wait(1)
         ScreenGui:Destroy()
-    end)
-
-    local collapseButton = Instance.new("TextButton")
-    collapseButton.Size = UDim2.new(0, 30, 0, 30)
-    collapseButton.Position = UDim2.new(0.949999988, -30, 0.137999997, 0)
-    collapseButton.BackgroundColor3 = Color3.fromRGB(255, 192, 203) -- ชมพู
-    collapseButton.Text = "-"
-    collapseButton.Font = Enum.Font.SourceSansBold
-    collapseButton.TextSize = 20
-    collapseButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-    collapseButton.Parent = mainFrame
-
-    -- เมื่อกดปุ่ม
-    collapseButton.MouseButton1Click:Connect(function()
-	isCollapsed = not isCollapsed
-	mainFrame.Size = isCollapsed and collapsedSize or expandedSize
-    end)
-
-    collapseButton.MouseEnter:Connect(function()
-        game.TweenService:Create(collapseButton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
-            BackgroundColor3 = Color3.fromRGB(255, 105, 180) -- ชมพูเข้มขึ้น
-        }):Play()
     end)
 
     MainSide.Name = "MainSide"
