@@ -300,7 +300,7 @@ function Kavo.CreateLib(kavName, themeList)
     MinimizeButton.Position = UDim2.new(0.949999988, -50, 0.137999997, 0)
     MinimizeButton.Size = UDim2.new(0, 21, 0, 21)
     MinimizeButton.ZIndex = 2
-    MinimizeButton.Image = "http://www.roblox.com/asset/?id=5597105827"
+    MinimizeButton.Image = "rbxassetid://5597105827"
     MinimizeButton.ImageRectOffset = Vector2.new(284, 4)
     MinimizeButton.ImageRectSize = Vector2.new(24, 24)
     MinimizeButton.MouseButton1Click:Connect(function()
@@ -310,7 +310,7 @@ function Kavo.CreateLib(kavName, themeList)
         }):Play()
         wait()
         game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0,525,0,60),
+			Size = UDim2.new(0,520,0,40), 
 			Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
 		}):Play()
         wait(1)
