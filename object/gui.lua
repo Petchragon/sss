@@ -325,14 +325,6 @@ function Kavo.CreateLib(kavName, themeList)
         end
     end)
 
-	            if not isMinimized then
-				for _, child in pairs(Main:GetChildren()) do
-   			 if child:IsA("GuiObject") then
-       			child.Visible = false -- ทำได้เฉพาะพวกที่แสดง GUI เท่านั้น
-   		 		end
-			end
-	
-   
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
     MainSide.BackgroundColor3 = themeList.Header
