@@ -166,16 +166,9 @@ function lib:Window(text)
     close.ImageRectOffset = Vector2.new(284, 4)
     close.ImageRectSize = Vector2.new(36, 36)
     close.MouseButton1Click:Connect(function()
-        game.TweenService:Create(close, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
-            ImageTransparency = 1
-        }):Play()
-        wait()
-        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			Size = UDim2.new(0,0,0,0),
-			Position = UDim2.new(0, Main.AbsolutePosition.X + (Main.AbsoluteSize.X / 2), 0, Main.AbsolutePosition.Y + (Main.AbsoluteSize.Y / 2))
-		}):Play()
-        wait(1)
-        ScreenGui:Destroy()
+        mainframe:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Quad", 0.25, true, function()
+		mainframe.Visible = false
+	end)
     end)
 
 	minimize.Name = "minimize"
