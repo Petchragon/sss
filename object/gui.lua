@@ -316,6 +316,12 @@ function Kavo.CreateLib(kavName, themeList)
         wait(1)
         isMinimized = true
         else
+			for _, child in pairs(Main:GetChildren()) do
+   			 if child:IsA("GuiObject") then
+       			child.Visible = false -- ทำได้เฉพาะพวกที่แสดง GUI เท่านั้น
+   		 		end
+			end
+
         game.TweenService:Create(MinimizeButton, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
             ImageTransparency = 0
         }):Play()
