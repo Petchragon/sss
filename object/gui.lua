@@ -206,6 +206,90 @@ function lib:Window(text)
 			end
 		end
 	)
+	function Tab:NewSection(secName, hidden)
+    secName = secName or "Section"
+    hidden = hidden or false
+
+    local sectionFrame = Instance.new("Frame")
+    sectionFrame.Name = "sectionFrame"
+    sectionFrame.Parent = self.page -- สมมติว่า Tab มี self.page เป็น container
+    sectionFrame.BackgroundColor3 = themeList.Background
+    sectionFrame.BorderSizePixel = 0
+    sectionFrame.LayoutOrder = #self.page:GetChildren() -- ตั้ง order ให้อัตโนมัติ
+
+    -- UIListLayout สำหรับ sectionFrame
+    local sectionListLayout = Instance.new("UIListLayout")
+    sectionListLayout.Name = "sectionListLayout"
+    sectionListLayout.Parent = sectionFrame
+    sectionListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    sectionListLayout.Padding = UDim.new(0, 5)
+
+    -- ส่วนหัว section (header)
+    local sectionHead = Instance.new("Frame")
+    sectionHead.Name = "sectionHead"
+    sectionHead.Parent = sectionFrame
+    sectionHead.BackgroundColor3 = themeList.SchemeColor
+    sectionHead.Size = UDim2.new(1, 0, 0, 33)
+    sectionHead.Visible = not hidden
+
+    local sHeadCorner = Instance.new("UICorner")
+    sHeadCorner.CornerRadius = UDim.new(0, 4)
+    sHeadCorner.Parent = sectionHead
+
+    local sectionNameLabel = Instance.new("TextLabel")
+    sectionNameLabel.Name = "sectionName"
+    sectionNameLabel.Parent = sectionHead
+    sectionNameLabel.BackgroundTransparency = 1
+    sectionNameLabel.Position = UDim2.new(0.02, 0, 0, 0)
+    sectionNameLabel.Size = UDim2.new(0.96, 0, 1, 0)
+    sectionNameLabel.Font = Enum.Font.Gotham
+    sectionNameLabel.Text = secName
+    sectionNameLabel.TextColor3 = themeList.TextColor
+    sectionNameLabel.TextSize = 14
+    sectionNameLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+    if themeList.SchemeColor == Color3.fromRGB(255, 255, 255) then
+        Utility:TweenObject(sectionNameLabel, {TextColor3 = Color3.fromRGB(0, 0, 0)}, 0.2)
+    elseif themeList.SchemeColor == Color3.fromRGB(0, 0, 0) then
+        Utility:TweenObject(sectionNameLabel, {TextColor3 = Color3.fromRGB(255, 255, 255)}, 0.2)
+    end
+
+    -- ส่วนเนื้อหาภายใน section
+    local sectionInners = Instance.new("Frame")
+    sectionInners.Name = "sectionInners"
+    sectionInners.Parent = sectionFrame
+    sectionInners.BackgroundTransparency = 1
+    sectionInners.Position = UDim2.new(0, 0, 0, 33)
+    sectionInners.Size = UDim2.new(1, 0, 1, -33) -- สูงเท่ากับ sectionFrame ลบ header
+
+    local sectionInnerList = Instance.new("UIListLayout")
+    sectionInnerList.Name = "sectionInnerList"
+    sectionInnerList.Parent = sectionInners
+    sectionInnerList.SortOrder = Enum.SortOrder.LayoutOrder
+    sectionInnerList.Padding = UDim.new(0, 3)
+
+    local sectionFunctions = {}
+
+    	function sectionFunctions:Button(text, callback)
+        	local btn = Instance.new("TextButton")
+        	btn.Parent = sectionInners
+        	btn.BackgroundColor3 = themeList.SchemeColor
+        	btn.TextColor3 = themeList.TextColor
+        	btn.Size = UDim2.new(1, 0, 0, 30)
+        	btn.Font = Enum.Font.Gotham
+        	btn.TextSize = 14
+        	btn.Text = text
+        	btn.AutoButtonColor = true
+        	btn.MouseButton1Click:Connect(function()
+         	if callback then callback() end
+        	end)
+        	return btn
+    	end
+
+    	-- ฟังก์ชันอื่น ๆ เช่น Toggle, Slider, etc. สามารถเพิ่มในนี้ได้
+
+    	return sectionFunctions
+	end
 
 	local tabs = {}
 
