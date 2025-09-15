@@ -192,7 +192,9 @@ function Kavo.CreateLib(kavName, themeList)
             v:Destroy()
         end
     end
-    local mini = false
+    
+    local isMinimized = false
+
     local ScreenGui = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
     local MainCorner = Instance.new("UICorner")
@@ -304,16 +306,16 @@ function Kavo.CreateLib(kavName, themeList)
 	minimize.ImageRectOffset = Vector2.new(884, 284)
 	minimize.ImageRectSize = Vector2.new(36, 36)
     minimize.MouseButton1Click:Connect(function()
-	    if mini == false then
+	    if not isMinimized then
 		    game.TweenService:Create(minimize, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
 			    Size = UDim2.new(0, 525, 0, 35)
 		    }):Play()
-		    mini = not mini
+		    isMinimized = true
 	    else
 		    game.TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
 			    Size = UDim2.new(0, 525, 0, 318)
 		    }):Play()
-		    mini = not mini
+		    isMinimized = false
 	    end
     end)
 
