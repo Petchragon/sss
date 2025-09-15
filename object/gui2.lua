@@ -302,17 +302,20 @@ function Kavo.CreateLib(kavName, themeList)
 	minimize.Image = "rbxassetid://3926307971"
 	minimize.ImageRectOffset = Vector2.new(884, 284)
 	minimize.ImageRectSize = Vector2.new(36, 36)
-    minimize.MouseButton1Click:Connect(
-		function()
-			if mini == false then
-				mainframe:TweenSize(UDim2.new(0, 396, 0, 27), "Out", "Quad", 0.25)
-				mini = not mini
-			else
-				mainframe:TweenSize(UDim2.new(0, 396, 0, 231), "In", "Quad", 0.25)
-				mini = not mini
-			end
-		end
-	)
+    minimize.MouseButton1Click:Connect(function()
+	    if not isMinimized then
+		    game.TweenService:Create(minimize, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			    Size = UDim2.new(0, 525, 0, 35)
+		    }):Play()
+		    isMinimized = true
+	    else
+		    game.TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			    Size = UDim2.new(0, 525, 0, 318)
+		    }):Play()
+		    isMinimized = false
+	    end
+    end)
+
 
 
     MainSide.Name = "MainSide"
