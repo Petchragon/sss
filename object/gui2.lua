@@ -192,7 +192,7 @@ function Kavo.CreateLib(kavName, themeList)
             v:Destroy()
         end
     end
-    
+
     local isMinimized = false
 
     local ScreenGui = Instance.new("ScreenGui")
@@ -307,7 +307,7 @@ function Kavo.CreateLib(kavName, themeList)
 	minimize.ImageRectSize = Vector2.new(36, 36)
     minimize.MouseButton1Click:Connect(function()
 	    if not isMinimized then
-		    game.TweenService:Create(minimize, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+		    game.TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
 			    Size = UDim2.new(0, 525, 0, 35)
 		    }):Play()
 		    isMinimized = true
