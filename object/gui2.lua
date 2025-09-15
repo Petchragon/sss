@@ -295,32 +295,6 @@ function Kavo.CreateLib(kavName, themeList)
         ScreenGui:Destroy()
     end)
 
-    minimize.Name = "minimize"
-	minimize.Parent = MainHeader
-	minimize.BackgroundTransparency = 1.000
-	minimize.LayoutOrder = 6
-	minimize.Position = UDim2.new(0.949999988, -35, 0.137999997, 0)
-	minimize.Size = UDim2.new(0, 21, 0, 21)
-	minimize.ZIndex = 2
-	minimize.Image = "rbxassetid://3926307971"
-	minimize.ImageRectOffset = Vector2.new(884, 284)
-	minimize.ImageRectSize = Vector2.new(36, 36)
-    minimize.MouseButton1Click:Connect(function()
-	    if not isMinimized then
-		    game.TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			    Size = UDim2.new(0, 525, 0, 35)
-		    }):Play()
-		    isMinimized = true
-	    else
-		    game.TweenService:Create(Main, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-			    Size = UDim2.new(0, 525, 0, 318)
-		    }):Play()
-		    isMinimized = false
-	    end
-    end)
-
-
-
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
     MainSide.BackgroundColor3 = themeList.Header
