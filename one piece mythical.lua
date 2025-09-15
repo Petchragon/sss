@@ -1,7 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Petchragon/sss/refs/heads/Claim/compass/object/gui.lua"))()
-local Window = Library.CreateLib("Petchragon", "Midnight")
-
-local Tab = Window:NewTab("Main")
+local Window = Library:Window("PetchHub")
+local Tab = Window:Tab("Main")
 
 -- Section สำหรับ Auto Claim
 local Section = Tab:NewSection("Auto Claim")
