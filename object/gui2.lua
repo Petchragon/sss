@@ -293,7 +293,7 @@ function Kavo.CreateLib(kavName, themeList)
     end)
 
     minimize.Name = "minimize"
-	minimize.Parent = top
+	minimize.Parent = MainHeader
 	minimize.BackgroundTransparency = 1.000
 	minimize.LayoutOrder = 6
 	minimize.Position = UDim2.new(0.949999988, -35, 0.137999997, 0)
