@@ -206,6 +206,7 @@ function lib:Window(text)
 			end
 		end
 	)
+	
 	function Tab:Section(secName, hidden)
     secName = secName or "Section"
     hidden = hidden or false
