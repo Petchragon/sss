@@ -3,12 +3,12 @@ local Window = Library:Window("PetchHub")
 local Tab = Window:Tab("Main")
 
 -- Section สำหรับ Auto Claim
-local Section = Tab:NewSection("Auto Claim")
+local Section = Tab:Section("Auto Claim")
 
 local ClaimLoopRunning = false
 local ClaimLoopThread
 
-Section:NewToggle("Auto Claim", "เปิด/ปิด การเคลมอัตโนมัติ", function(state)
+Section:Toggle("Auto Claim", "เปิด/ปิด การเคลมอัตโนมัติ", function(state)
     ClaimLoopRunning = state
 
     if ClaimLoopRunning then
@@ -30,7 +30,7 @@ end)
 
 ------------------------------------------------------------------------------------------------------
 
-local Section = Tab:NewSection("Haki Control")
+local Section = Tab:Section("Haki Control")
 local hakiLoopRunning = false
 local hakiLoopThread
 
