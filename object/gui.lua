@@ -175,7 +175,7 @@ function lib:Window(text)
 	minimize.Parent = top
 	minimize.BackgroundTransparency = 1.000
 	minimize.LayoutOrder = 6
-	minimize.Position = UDim2.new(0.931818187, -20, 0.111111112, 0)
+	minimize.Position = UDim2.new(0.931818187, -20 , 0.111111112, 0)
 	minimize.Size = UDim2.new(0, 20, 0, 20)
 	minimize.ZIndex = 2
 	minimize.Image = "rbxassetid://3926307971"
@@ -273,117 +273,9 @@ function lib:Window(text)
 			end
 		)
 
-		local Sections = {}
-        local focusing = false
-        local viewDe = false
+		local tab = {}
 
-        coroutine.wrap(function()
-            while wait() do
-                page.BackgroundColor3 = themeList.Background
-                page.ScrollBarImageColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 16, themeList.SchemeColor.g * 255 - 15, themeList.SchemeColor.b * 255 - 28)
-                tabButton.TextColor3 = themeList.TextColor
-                tabButton.BackgroundColor3 = themeList.SchemeColor
-            end
-        end)()
-		
-		function Sections:Section(secName, hidden)
-            secName = secName or "Section"
-            local sectionFunctions = {}
-            local modules = {}
-	    hidden = hidden or false
-            local sectionFrame = Instance.new("Frame")
-            local sectionlistoknvm = Instance.new("UIListLayout")
-            local sectionHead = Instance.new("Frame")
-            local sHeadCorner = Instance.new("UICorner")
-            local sectionName = Instance.new("TextLabel")
-            local sectionInners = Instance.new("Frame")
-            local sectionElListing = Instance.new("UIListLayout")
-			
-	    if hidden then
-		sectionHead.Visible = false
-	    else
-		sectionHead.Visible = true
-	    end
-
-            sectionFrame.Name = "sectionFrame"
-            sectionFrame.Parent = page
-            sectionFrame.BackgroundColor3 = themeList.Background--36, 37, 43
-            sectionFrame.BorderSizePixel = 0
-            
-            sectionlistoknvm.Name = "sectionlistoknvm"
-            sectionlistoknvm.Parent = sectionFrame
-            sectionlistoknvm.SortOrder = Enum.SortOrder.LayoutOrder
-            sectionlistoknvm.Padding = UDim.new(0, 5)
-
-            for i,v in pairs(sectionInners:GetChildren()) do
-                while wait() do
-                    if v:IsA("Frame") or v:IsA("TextButton") then
-                        function size(pro)
-                            if pro == "Size" then
-                                UpdateSize()
-                                updateSectionFrame()
-                            end
-                        end
-                        v.Changed:Connect(size)
-                    end
-                end
-            end
-            sectionHead.Name = "sectionHead"
-            sectionHead.Parent = sectionFrame
-            sectionHead.BackgroundColor3 = themeList.SchemeColor
-            Objects[sectionHead] = "BackgroundColor3"
-            sectionHead.Size = UDim2.new(0, 352, 0, 33)
-
-            sHeadCorner.CornerRadius = UDim.new(0, 4)
-            sHeadCorner.Name = "sHeadCorner"
-            sHeadCorner.Parent = sectionHead
-
-            sectionName.Name = "sectionName"
-            sectionName.Parent = sectionHead
-            sectionName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            sectionName.BackgroundTransparency = 1.000
-            sectionName.BorderColor3 = Color3.fromRGB(27, 42, 53)
-            sectionName.Position = UDim2.new(0.0198863633, 0, 0, 0)
-            sectionName.Size = UDim2.new(0.980113626, 0, 1, 0)
-            sectionName.Font = Enum.Font.Gotham
-            sectionName.Text = secName
-            sectionName.RichText = true
-            sectionName.TextColor3 = themeList.TextColor
-            Objects[sectionName] = "TextColor3"
-            sectionName.TextSize = 14.000
-            sectionName.TextXAlignment = Enum.TextXAlignment.Left
-            if themeList.SchemeColor == Color3.fromRGB(255,255,255) then
-                Utility:TweenObject(sectionName, {TextColor3 = Color3.fromRGB(0,0,0)}, 0.2)
-            end 
-            if themeList.SchemeColor == Color3.fromRGB(0,0,0) then
-                Utility:TweenObject(sectionName, {TextColor3 = Color3.fromRGB(255,255,255)}, 0.2)
-            end 
-               
-            sectionInners.Name = "sectionInners"
-            sectionInners.Parent = sectionFrame
-            sectionInners.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            sectionInners.BackgroundTransparency = 1.000
-            sectionInners.Position = UDim2.new(0, 0, 0.190751448, 0)
-
-            sectionElListing.Name = "sectionElListing"
-            sectionElListing.Parent = sectionInners
-            sectionElListing.SortOrder = Enum.SortOrder.LayoutOrder
-            sectionElListing.Padding = UDim.new(0, 3)
-
-            
-        coroutine.wrap(function()
-            while wait() do
-                sectionFrame.BackgroundColor3 = themeList.Background
-                sectionHead.BackgroundColor3 = themeList.SchemeColor
-                tabButton.TextColor3 = themeList.TextColor
-                tabButton.BackgroundColor3 = themeList.SchemeColor
-                sectionName.TextColor3 = themeList.TextColor
-            end
-        end)()
-
-    local Element = {}
-
-		function Element:Button(text, callback)
+		function tab:Button(text, callback)
 			callback = callback or function(...)
 			end
 			local button = Instance.new("TextButton")
@@ -437,7 +329,7 @@ function lib:Window(text)
 			)
 		end
 
-		function Element:Toggle(text, callback)
+		function tab:Toggle(text, callback)
 			local toggle = Instance.new("TextButton")
 			local title = Instance.new("TextLabel")
 			local status = Instance.new("Frame")
@@ -540,7 +432,7 @@ function lib:Window(text)
 			)
 		end
 
-		function Element:Slider(text, min, max, start, callback)
+		function tab:Slider(text, min, max, start, callback)
 			local inputService = game:GetService("UserInputService")
 			local slider = Instance.new("Frame")
 			local title = Instance.new("TextLabel")
@@ -638,7 +530,7 @@ function lib:Window(text)
 			)
 		end
 
-		function Element:Dropdown(text, list, callback)
+		function tab:Dropdown(text, list, callback)
 			list = list or {}
 			local d = false
 			callback = callback or function(...)
@@ -820,7 +712,7 @@ function lib:Window(text)
 			end
 		end
 
-		function Element:Textbox(text, disapeer, callback)
+		function tab:Textbox(text, disapeer, callback)
 			callback = callback or function(...)
 			end
 			local textbox = Instance.new("Frame")
@@ -868,21 +760,20 @@ function lib:Window(text)
 			textboxmain.TextSize = 14.000
 			container.CanvasSize = UDim2.new(0, 0, 0, containerlist.AbsoluteContentSize.Y + 10)
 
-				textboxmain.FocusLost:Connect(
-					function(ep)
-						if ep then
-							if #textboxmain.Text > 0 then
-								pcall(callback, textboxmain.Text)
-								if disapeer then
-									textboxmain.Text = ""
-								end
+			textboxmain.FocusLost:Connect(
+				function(ep)
+					if ep then
+						if #textboxmain.Text > 0 then
+							pcall(callback, textboxmain.Text)
+							if disapeer then
+								textboxmain.Text = ""
 							end
 						end
 					end
-				)
-			end
-		return Element
+				end
+			)
 		end
+		return tab
 	end
 	return tabs
 end
