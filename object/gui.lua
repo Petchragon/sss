@@ -272,7 +272,6 @@ function tabs:Tab(title)
         container.Visible = true
     end)
 
-    -- อาจจะ return container ด้วยเพื่อใช้สร้าง UI ภายในแท็บได้
 		local tab = {}
 
 		function tab:Button(text, callback)

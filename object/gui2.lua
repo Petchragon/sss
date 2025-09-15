@@ -192,9 +192,6 @@ function Kavo.CreateLib(kavName, themeList)
             v:Destroy()
         end
     end
-
-    local isMinimized = false
-
     local ScreenGui = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
     local MainCorner = Instance.new("UICorner")
@@ -214,6 +211,8 @@ function Kavo.CreateLib(kavName, themeList)
     local infoContainer = Instance.new("Frame")
 
     local blurFrame = Instance.new("Frame")
+
+    local mini = false
 
     Kavo:DraggingEnabled(MainHeader, Main)
 
@@ -295,6 +294,17 @@ function Kavo.CreateLib(kavName, themeList)
         ScreenGui:Destroy()
     end)
 
+    minimize.Name = "minimize"
+	minimize.Parent = top
+	minimize.BackgroundTransparency = 1.000
+	minimize.LayoutOrder = 6
+	minimize.Position = UDim2.new(0.949999988, -40, 0.137999997, 0)
+	minimize.Size = UDim2.new(0, 21, 0, 21)
+	minimize.ZIndex = 2
+	minimize.Image = "rbxassetid://3926307971"
+	minimize.ImageRectOffset = Vector2.new(884, 284)
+	minimize.ImageRectSize = Vector2.new(36, 36)
+
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
     MainSide.BackgroundColor3 = themeList.Header
@@ -369,6 +379,19 @@ function Kavo.CreateLib(kavName, themeList)
             themeList.ElementColor = color
         end
     end
+
+    minimize.MouseButton1Click:Connect(
+		function()
+			if mini == false then
+				Main:TweenSize(UDim2.new(0, 525, 0, 40), "Out", "Quad", 0.25)
+				mini = not mini
+			else
+				Main:TweenSize(UDim2.new(0, 525, 0, 318), "In", "Quad", 0.25)
+				mini = not mini
+			end
+		end
+	)
+
     local Tabs = {}
 
     local first = true
