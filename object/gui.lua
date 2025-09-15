@@ -110,7 +110,7 @@ function lib:Window(text)
 	local tablist = Instance.new("UIListLayout")
 	local top = Instance.new("Frame")
 	local title = Instance.new("TextLabel")
-    local close = Instance.new("ImageButton")
+	local close = Instance.new("ImageButton")
 	local minimize = Instance.new("ImageButton")
 
 	VenLib.Name = "VenLib"
@@ -156,7 +156,7 @@ function lib:Window(text)
 	top.Position = UDim2.new(0, 0, -0.00381628261, 0)
 	top.Size = UDim2.new(0, 396, 0, 27)
 
-    close.Name = "close"
+	close.Name = "close"
     close.Parent = top
     close.BackgroundTransparency = 1.000
     close.Position = UDim2.new(0.931818187, 0, 0.111111112, 0)
@@ -167,15 +167,15 @@ function lib:Window(text)
     close.ImageRectSize = Vector2.new(36, 36)
     close.MouseButton1Click:Connect(function()
         mainframe:TweenSize(UDim2.new(0, 396, 0, 27), "Out", "Quad", 0.25, true, function()
-		mainframe.Visible = false
-	end)
+        mainframe.Visible = false
+    end)
     end)
 
 	minimize.Name = "minimize"
 	minimize.Parent = top
 	minimize.BackgroundTransparency = 1.000
 	minimize.LayoutOrder = 6
-	minimize.Position = UDim2.new(0.931818187, -25, 0.111111112, 0)
+	minimize.Position = UDim2.new(0.931818187, -20, 0.111111112, 0)
 	minimize.Size = UDim2.new(0, 20, 0, 20)
 	minimize.ZIndex = 2
 	minimize.Image = "rbxassetid://3926307971"
@@ -774,81 +774,7 @@ function lib:Window(text)
 			)
 		end
 		return tab
-		
 	end
-	function tab:Section(title)
-    local section = Instance.new("Frame")
-    local label = Instance.new("TextLabel")
-    local sectionLayout = Instance.new("UIListLayout")
-    
-    section.Name = "section"
-    section.Parent = container
-    section.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    section.BorderSizePixel = 0
-    section.Size = UDim2.new(1, -12, 0, 30) -- จะปรับความสูงแบบอัตโนมัติภายหลัง
-    section.AutomaticSize = Enum.AutomaticSize.Y
-    section.LayoutOrder = 0
-
-    label.Name = "label"
-    label.Parent = section
-    label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    label.BackgroundTransparency = 1.000
-    label.Position = UDim2.new(0, 5, 0, 0)
-    label.Size = UDim2.new(1, -10, 0, 25)
-    label.Font = Enum.Font.GothamBold
-    label.Text = title
-    label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    label.TextSize = 14.000
-    label.TextXAlignment = Enum.TextXAlignment.Left
-
-    sectionLayout.Name = "sectionLayout"
-    sectionLayout.Parent = section
-    sectionLayout.SortOrder = Enum.SortOrder.LayoutOrder
-    sectionLayout.Padding = UDim.new(0, 4)
-
-    container.CanvasSize = UDim2.new(0, 0, 0, containerlist.AbsoluteContentSize.Y + 10)
-
-    local sectionTable = {}
-
-    -- เปลี่ยนฟังก์ชันปุ่มต่าง ๆ ให้ใช้ parent เป็น section แทน container
-    function sectionTable:Button(text, callback)
-        callback = callback or function() end
-        tab.Button(text, callback)
-        local btn = container:FindFirstChild("button")
-        if btn then btn.Parent = section end
-    end
-
-    function sectionTable:Toggle(text, callback)
-        callback = callback or function() end
-        tab.Toggle(text, callback)
-        local tgl = container:FindFirstChild("toggle")
-        if tgl then tgl.Parent = section end
-    end
-
-    function sectionTable:Slider(text, min, max, start, callback)
-        callback = callback or function() end
-        tab.Slider(text, min, max, start, callback)
-        local sl = container:FindFirstChild("slider")
-        if sl then sl.Parent = section end
-    end
-
-    function sectionTable:Dropdown(text, list, callback)
-        callback = callback or function() end
-        tab.Dropdown(text, list, callback)
-        local dd = container:FindFirstChild("dropdown")
-        if dd then dd.Parent = section end
-    end
-
-    function sectionTable:Textbox(text, disappear, callback)
-        callback = callback or function() end
-        tab.Textbox(text, disappear, callback)
-        local tb = container:FindFirstChild("textbox")
-        if tb then tb.Parent = section end
-    end
-
-    return sectionTable
-end
-
 	return tabs
 end
 return lib
