@@ -272,10 +272,44 @@ function lib:Window(text)
 				container.Visible = true
 			end
 		)
+		-- ภายใน function tabs:Tab(title)
+		local section = {}
+-- เพิ่มเมธอด Section ลงใน tab
+function section:Section(secName)
+    secName = secName or "Section"
+    -- สร้างกรอบ section
+    local section = Instance.new("Frame")
+    section.Name = "Section_" .. secName
+    section.Parent = container
+    section.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    section.BorderSizePixel = 0
+    section.Size = UDim2.new(1, -12, 0, 30)  -- adjust width minus margin, heightเริ่มต้น
+    section.AutomaticSize = Enum.AutomaticSize.Y
+    section.LayoutOrder = #container:GetChildren() + 1
 
-		local tab = {}
+    -- Label ชื่อ section
+    local label = Instance.new("TextLabel")
+    label.Name = "SectionLabel"
+    label.Parent = section
+    label.BackgroundTransparency = 1
+    label.Position = UDim2.new(0, 6, 0, 0)
+    label.Size = UDim2.new(1, -12, 0, 25)
+    label.Font = Enum.Font.Gotham
+    label.Text = secName
+    label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    label.TextSize = 14
+    label.TextXAlignment = Enum.TextXAlignment.Left
 
-		function tab:Button(text, callback)
+    -- Layout ภายใน section
+    local layout = Instance.new("UIListLayout")
+    layout.Parent = section
+    layout.SortOrder = Enum.SortOrder.LayoutOrder
+    layout.Padding = UDim.new(0, 4)
+
+    -- ตารางสำหรับเมธอดของ section
+    local Element = {}
+
+		function Element:Button(text, callback)
 			callback = callback or function(...)
 			end
 			local button = Instance.new("TextButton")
@@ -329,7 +363,7 @@ function lib:Window(text)
 			)
 		end
 
-		function tab:Toggle(text, callback)
+		function Element:Toggle(text, callback)
 			local toggle = Instance.new("TextButton")
 			local title = Instance.new("TextLabel")
 			local status = Instance.new("Frame")
@@ -432,7 +466,7 @@ function lib:Window(text)
 			)
 		end
 
-		function tab:Slider(text, min, max, start, callback)
+		function Element:Slider(text, min, max, start, callback)
 			local inputService = game:GetService("UserInputService")
 			local slider = Instance.new("Frame")
 			local title = Instance.new("TextLabel")
@@ -530,7 +564,7 @@ function lib:Window(text)
 			)
 		end
 
-		function tab:Dropdown(text, list, callback)
+		function Element:Dropdown(text, list, callback)
 			list = list or {}
 			local d = false
 			callback = callback or function(...)
@@ -712,7 +746,7 @@ function lib:Window(text)
 			end
 		end
 
-		function tab:Textbox(text, disapeer, callback)
+		function Element:Textbox(text, disapeer, callback)
 			callback = callback or function(...)
 			end
 			local textbox = Instance.new("Frame")
@@ -760,20 +794,21 @@ function lib:Window(text)
 			textboxmain.TextSize = 14.000
 			container.CanvasSize = UDim2.new(0, 0, 0, containerlist.AbsoluteContentSize.Y + 10)
 
-			textboxmain.FocusLost:Connect(
-				function(ep)
-					if ep then
-						if #textboxmain.Text > 0 then
-							pcall(callback, textboxmain.Text)
-							if disapeer then
-								textboxmain.Text = ""
+				textboxmain.FocusLost:Connect(
+					function(ep)
+						if ep then
+							if #textboxmain.Text > 0 then
+								pcall(callback, textboxmain.Text)
+								if disapeer then
+									textboxmain.Text = ""
+								end
 							end
 						end
 					end
-				end
-			)
+				)
+			end
+		return Element
 		end
-		return tab
 	end
 	return tabs
 end
