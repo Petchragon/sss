@@ -209,70 +209,70 @@ function lib:Window(text)
 
 	local tabs = {}
 
-	function tabs:Tab(title)
-		local tabbtn = Instance.new("TextButton")
-		local containerpadding = Instance.new("UIPadding")
-		local container = Instance.new("ScrollingFrame")
-		local containerlist = Instance.new("UIListLayout")
-		tabbtn.Name = "tabbtn"
-		tabbtn.Parent = tabholder
-		tabbtn.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
-		tabbtn.BorderSizePixel = 0
-		tabbtn.BackgroundTransparency = 1
-		tabbtn.AutoButtonColor = false
-		tabbtn.Font = Enum.Font.Gotham
-		tabbtn.Text = title
-		tabbtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-		tabbtn.TextSize = 14.000
-		tabbtn.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
-		tabbtn.Size = UDim2.new(0, tabbtn.TextBounds.X + 15, 0, 21)
+	local ft = false
+local vistab = true
 
-		container.Name = "container"
-		container.Parent = containers
-		container.Active = true
-		container.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
-		container.BorderSizePixel = 0
-		container.Position = UDim2.new(0.0227272734, 0, 2.11481524, 0)
-		container.Size = UDim2.new(0, 377, 0, 164)
-		container.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
-		container.CanvasSize = UDim2.new(0, 0, 0, 0)
-		container.ScrollBarThickness = 3
-		container.Visible = vistab
-		container.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
+function tabs:Tab(title)
+    local tabbtn = Instance.new("TextButton")
+    local containerpadding = Instance.new("UIPadding")
+    local container = Instance.new("ScrollingFrame")
+    local containerlist = Instance.new("UIListLayout")
+    
+    tabbtn.Name = "tabbtn"
+    tabbtn.Parent = tabholder
+    tabbtn.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+    tabbtn.BorderSizePixel = 0
+    tabbtn.BackgroundTransparency = 1
+    tabbtn.AutoButtonColor = false
+    tabbtn.Font = Enum.Font.Gotham
+    tabbtn.Text = title
+    tabbtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    tabbtn.TextSize = 14.000
+    tabbtn.Size = UDim2.new(0, tabbtn.TextBounds.X + 15, 0, 21)
 
-		containerpadding.Name = "containerpadding"
-		containerpadding.Parent = container
-		containerpadding.PaddingLeft = UDim.new(0, 6)
-		containerpadding.PaddingTop = UDim.new(0, 6)
+    container.Name = "container"
+    container.Parent = containers
+    container.Active = true
+    container.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+    container.BorderSizePixel = 0
+    container.Position = UDim2.new(0.0227, 0, 0.1, 0) -- ปรับตำแหน่งให้แสดงได้
+    container.Size = UDim2.new(0, 377, 0, 164)
+    container.CanvasSize = UDim2.new(0, 0, 0, 0)
+    container.ScrollBarThickness = 3
+    container.Visible = vistab
 
-		containerlist.Name = "containerlist"
-		containerlist.Parent = container
-		containerlist.SortOrder = Enum.SortOrder.LayoutOrder
-		containerlist.Padding = UDim.new(0, 3)
+    containerpadding.Name = "containerpadding"
+    containerpadding.Parent = container
+    containerpadding.PaddingLeft = UDim.new(0, 6)
+    containerpadding.PaddingTop = UDim.new(0, 6)
 
-		if ft == false then
-			ft = true
-			vistab = false
-			tabbtn.BackgroundTransparency = 0
-		end
+    containerlist.Name = "containerlist"
+    containerlist.Parent = container
+    containerlist.SortOrder = Enum.SortOrder.LayoutOrder
+    containerlist.Padding = UDim.new(0, 3)
 
-		tabbtn.MouseButton1Click:Connect(
-			function()
-				for i, v in next, containers:GetChildren() do
-					if v.Name == "container" then
-						v.Visible = false
-					end
-				end
-				for i, v in next, tabholder:GetChildren() do
-					if v.ClassName == "TextButton" then
-						v.BackgroundTransparency = 1
-					end
-				end
-				tabbtn.BackgroundTransparency = 0
-				container.Visible = true
-			end
-		)
+    if ft == false then
+        ft = true
+        vistab = false
+        tabbtn.BackgroundTransparency = 0
+    end
 
+    tabbtn.MouseButton1Click:Connect(function()
+        for i, v in next, containers:GetChildren() do
+            if v.Name == "container" then
+                v.Visible = false
+            end
+        end
+        for i, v in next, tabholder:GetChildren() do
+            if v.ClassName == "TextButton" then
+                v.BackgroundTransparency = 1
+            end
+        end
+        tabbtn.BackgroundTransparency = 0
+        container.Visible = true
+    end)
+
+    -- อาจจะ return container ด้วยเพื่อใช้สร้าง UI ภายในแท็บได้
 		local tab = {}
 
 		function tab:Button(text, callback)
@@ -774,6 +774,7 @@ function lib:Window(text)
 			)
 		end
 		return tab
+		
 	end
 	return tabs
 end
