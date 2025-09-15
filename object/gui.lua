@@ -272,41 +272,115 @@ function lib:Window(text)
 				container.Visible = true
 			end
 		)
-		-- ภายใน function tabs:Tab(title)
-		local section = {}
--- เพิ่มเมธอด Section ลงใน tab
-function section:Section(secName)
-    secName = secName or "Section"
-    -- สร้างกรอบ section
-    local section = Instance.new("Frame")
-    section.Name = "Section_" .. secName
-    section.Parent = container
-    section.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    section.BorderSizePixel = 0
-    section.Size = UDim2.new(1, -12, 0, 30)  -- adjust width minus margin, heightเริ่มต้น
-    section.AutomaticSize = Enum.AutomaticSize.Y
-    section.LayoutOrder = #container:GetChildren() + 1
 
-    -- Label ชื่อ section
-    local label = Instance.new("TextLabel")
-    label.Name = "SectionLabel"
-    label.Parent = section
-    label.BackgroundTransparency = 1
-    label.Position = UDim2.new(0, 6, 0, 0)
-    label.Size = UDim2.new(1, -12, 0, 25)
-    label.Font = Enum.Font.Gotham
-    label.Text = secName
-    label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    label.TextSize = 14
-    label.TextXAlignment = Enum.TextXAlignment.Left
+		local Sections = {}
+        local focusing = false
+        local viewDe = false
 
-    -- Layout ภายใน section
-    local layout = Instance.new("UIListLayout")
-    layout.Parent = section
-    layout.SortOrder = Enum.SortOrder.LayoutOrder
-    layout.Padding = UDim.new(0, 4)
+        coroutine.wrap(function()
+            while wait() do
+                page.BackgroundColor3 = themeList.Background
+                page.ScrollBarImageColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 16, themeList.SchemeColor.g * 255 - 15, themeList.SchemeColor.b * 255 - 28)
+                tabButton.TextColor3 = themeList.TextColor
+                tabButton.BackgroundColor3 = themeList.SchemeColor
+            end
+        end)()
+		
+		function Sections:Section(secName, hidden)
+            secName = secName or "Section"
+            local sectionFunctions = {}
+            local modules = {}
+	    hidden = hidden or false
+            local sectionFrame = Instance.new("Frame")
+            local sectionlistoknvm = Instance.new("UIListLayout")
+            local sectionHead = Instance.new("Frame")
+            local sHeadCorner = Instance.new("UICorner")
+            local sectionName = Instance.new("TextLabel")
+            local sectionInners = Instance.new("Frame")
+            local sectionElListing = Instance.new("UIListLayout")
+			
+	    if hidden then
+		sectionHead.Visible = false
+	    else
+		sectionHead.Visible = true
+	    end
 
-    -- ตารางสำหรับเมธอดของ section
+            sectionFrame.Name = "sectionFrame"
+            sectionFrame.Parent = page
+            sectionFrame.BackgroundColor3 = themeList.Background--36, 37, 43
+            sectionFrame.BorderSizePixel = 0
+            
+            sectionlistoknvm.Name = "sectionlistoknvm"
+            sectionlistoknvm.Parent = sectionFrame
+            sectionlistoknvm.SortOrder = Enum.SortOrder.LayoutOrder
+            sectionlistoknvm.Padding = UDim.new(0, 5)
+
+            for i,v in pairs(sectionInners:GetChildren()) do
+                while wait() do
+                    if v:IsA("Frame") or v:IsA("TextButton") then
+                        function size(pro)
+                            if pro == "Size" then
+                                UpdateSize()
+                                updateSectionFrame()
+                            end
+                        end
+                        v.Changed:Connect(size)
+                    end
+                end
+            end
+            sectionHead.Name = "sectionHead"
+            sectionHead.Parent = sectionFrame
+            sectionHead.BackgroundColor3 = themeList.SchemeColor
+            Objects[sectionHead] = "BackgroundColor3"
+            sectionHead.Size = UDim2.new(0, 352, 0, 33)
+
+            sHeadCorner.CornerRadius = UDim.new(0, 4)
+            sHeadCorner.Name = "sHeadCorner"
+            sHeadCorner.Parent = sectionHead
+
+            sectionName.Name = "sectionName"
+            sectionName.Parent = sectionHead
+            sectionName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            sectionName.BackgroundTransparency = 1.000
+            sectionName.BorderColor3 = Color3.fromRGB(27, 42, 53)
+            sectionName.Position = UDim2.new(0.0198863633, 0, 0, 0)
+            sectionName.Size = UDim2.new(0.980113626, 0, 1, 0)
+            sectionName.Font = Enum.Font.Gotham
+            sectionName.Text = secName
+            sectionName.RichText = true
+            sectionName.TextColor3 = themeList.TextColor
+            Objects[sectionName] = "TextColor3"
+            sectionName.TextSize = 14.000
+            sectionName.TextXAlignment = Enum.TextXAlignment.Left
+            if themeList.SchemeColor == Color3.fromRGB(255,255,255) then
+                Utility:TweenObject(sectionName, {TextColor3 = Color3.fromRGB(0,0,0)}, 0.2)
+            end 
+            if themeList.SchemeColor == Color3.fromRGB(0,0,0) then
+                Utility:TweenObject(sectionName, {TextColor3 = Color3.fromRGB(255,255,255)}, 0.2)
+            end 
+               
+            sectionInners.Name = "sectionInners"
+            sectionInners.Parent = sectionFrame
+            sectionInners.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            sectionInners.BackgroundTransparency = 1.000
+            sectionInners.Position = UDim2.new(0, 0, 0.190751448, 0)
+
+            sectionElListing.Name = "sectionElListing"
+            sectionElListing.Parent = sectionInners
+            sectionElListing.SortOrder = Enum.SortOrder.LayoutOrder
+            sectionElListing.Padding = UDim.new(0, 3)
+
+            
+        coroutine.wrap(function()
+            while wait() do
+                sectionFrame.BackgroundColor3 = themeList.Background
+                sectionHead.BackgroundColor3 = themeList.SchemeColor
+                tabButton.TextColor3 = themeList.TextColor
+                tabButton.BackgroundColor3 = themeList.SchemeColor
+                sectionName.TextColor3 = themeList.TextColor
+            end
+        end)()
+
     local Element = {}
 
 		function Element:Button(text, callback)
